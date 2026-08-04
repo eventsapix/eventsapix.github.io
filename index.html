@@ -1,405 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events APIX Portfolio</title>
-    <style>
-        /* --- Global Styling --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* --- Header / Business Intro Section --- */
-        header {
-            width: 100%;
-            max-width: 1100px;
-            box-sizing: border-box;
-            padding: 30px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #2a2a2a;
-        }
-
-        .intro-text {
-            max-width: 65%;
-        }
-
-        .intro-text h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.2rem;
-            letter-spacing: 1px;
-            color: #f1f1f1;
-        }
-
-        .intro-text p {
-            margin: 0;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: #aaaaaa;
-        }
-
-        .logo-container img {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid #333;
-        }
-
-        /* --- Navigation / Back to Home Banner --- */
-        .nav-banner {
-            width: 100%;
-            max-width: 1100px;
-            padding: 15px 20px;
-            box-sizing: border-box;
-            display: none; /* Hidden on main home page view */
-            justify-content: flex-start;
-        }
-
-        .home-btn {
-            background-color: transparent;
-            color: #ffffff;
-            border: 1px solid #ffffff;
-            padding: 8px 18px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .home-btn:hover {
-            background-color: #ffffff;
-            color: #121212;
-        }
-
-        /* --- Main Content Area --- */
-        main {
-            width: 100%;
-            max-width: 1100px;
-            padding: 40px 20px;
-            box-sizing: border-box;
-            flex-grow: 1;
-        }
-
-        /* View switching controller */
-        .view {
-            display: none;
-        }
-
-        .view.active {
-            display: block;
-        }
-
-        /* --- Section Titles --- */
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border-left: 4px solid #ffffff;
-            padding-left: 15px;
-        }
-
-        /* --- Grid System for Cards/Tabs --- */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            width: 100%;
-        }
-
-        /* Card Elements */
-        .card {
-            position: relative;
-            background-color: #1e1e1e;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            aspect-ratio: 4 / 3;
-            text-decoration: none;
-            display: block;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255,255,255,0.1);
-        }
-
-        .card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .card:hover img {
-            transform: scale(1.04);
-        }
-
-        /* Overlay Text styling */
-        .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.85));
-            padding: 20px;
-            text-align: center;
-        }
-
-        .card-overlay h3 {
-            margin: 0;
-            font-size: 1.2rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            color: #ffffff;
-        }
-
-        /* --- Contact Page Styling --- */
-        .contact-box {
-            background-color: #1e1e1e;
-            padding: 40px;
-            border-radius: 8px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            text-align: center;
-        }
-
-        .contact-item {
-            margin: 25px 0;
-        }
-
-        .contact-item h4 {
-            margin: 0 0 5px 0;
-            color: #aaaaaa;
-            font-weight: 400;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        .contact-item a, .contact-item p {
-            margin: 0;
-            font-size: 1.4rem;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .contact-item a:hover {
-            text-decoration: underline;
-        }
-
-        /* --- Mobile Responsive adjustments --- */
-        @media(max-width: 768px) {
-            header {
-                flex-direction: column-reverse;
-                text-align: center;
-                gap: 20px;
-            }
-            .intro-text {
-                max-width: 100%;
-            }
-            .logo-container img {
-                width: 100px;
-                height: 100px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events APIX Portfolio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #f1f1f1;
+      line-height: 1.6;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      background-color: #1e1e1e;
+      border-bottom: 1px solid #333;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-img {
+      max-height: 60px;
+      width: auto;
+      border-radius: 4px;
+    }
+    .brand-text p {
+      font-size: 0.95rem;
+      color: #ccc;
+      max-width: 500px;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+    nav button {
+      background: transparent;
+      border: 1px solid #e0a96d;
+      color: #e0a96d;
+      padding: 8px 16px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    nav button:hover {
+      background-color: #e0a96d;
+      color: #121212;
+    }
+    main {
+      padding: 40px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .view-title {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #e0a96d;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #333;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(224, 169, 109, 0.2);
+    }
+    .card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .card-title {
+      padding: 15px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .contact-container {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 40px;
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: center;
+    }
+    .contact-item {
+      margin: 20px 0;
+      font-size: 1.2rem;
+    }
+    .contact-item a {
+      color: #e0a96d;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+    .view-section {
+      display: none;
+    }
+    .view-section.active {
+      display: block;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Professional Top Intro Panel -->
-    <header>
-        <div class="intro-text">
-            <h1>Events APIX</h1>
-            <p>We cover events and portraits across Canada. We use high-end DSLR cameras from both Canon and Sony to perfectly preserve your life's milestone moments.</p>
-        </div>
-        <div class="logo-container">
-            <!-- Business Logo -->
-            <a href="https://adobe.ly/4atQKOT" target="_blank">
-                <img src="https://picsum.photos/200?random=20" alt="Events APIX Logo">
-            </a>
-        </div>
-    </header>
-
-    <!-- Global "Go To Home" navigation strip -->
-    <div class="nav-banner" id="navBanner">
-        <button class="home-btn" onclick="showView('home')">← Go To Home</button>
+  <header>
+    <div class="brand-section">
+      <img src="https://i.postimg.cc/DzgNrh7B/Apix-Logo.png" alt="Events APIX Logo" class="logo-img">
+      <div class="brand-text">
+        <p>We cover events and portraits across Canada. We use high-end DSLR cameras from both Canon and Sony to perfectly preserve your life's milestone moments.</p>
+      </div>
     </div>
+    <nav>
+      <button onclick="showView('home')">Home</button>
+      <button onclick="showView('contact')">Contact Us</button>
+    </nav>
+  </header>
 
-    <!-- Main Dynamic Application Screen Window -->
-    <main>
-
-        <!-- ================= PAGE 1: HOME VIEW ================= -->
-        <div id="home" class="view active">
-            <h2 class="section-title">Our Portfolios</h2>
-            <div class="grid-container">
-                <!-- Tab 1: Weddings -->
-                <div class="card" onclick="showView('weddings')">
-                    <img src="https://picsum.photos/600/450?random=1" alt="Weddings category">
-                    <div class="card-overlay"><h3>Weddings</h3></div>
-                </div>
-                <!-- Tab 2: Kids Birthdays & Baptism -->
-                <div class="card" onclick="showView('kids')">
-                    <img src="https://picsum.photos/600/450?random=2" alt="Kids Events category">
-                    <div class="card-overlay"><h3>Kids Birthdays / Baptism</h3></div>
-                </div>
-                <!-- Tab 3: Family Events -->
-                <div class="card" onclick="showView('family')">
-                    <img src="https://picsum.photos/600/450?random=3" alt="Family Events category">
-                    <div class="card-overlay"><h3>Family Events</h3></div>
-                </div>
-                <!-- Tab 4: Baby Showers -->
-                <div class="card" onclick="showView('babyshower')">
-                    <img src="https://picsum.photos/600/450?random=4" alt="Baby Showers category">
-                    <div class="card-overlay"><h3>Babyshower / Gender Reveal</h3></div>
-                </div>
-                <!-- Tab 5: Contact Page Triger -->
-                <div class="card" onclick="showView('contact')">
-                    <img src="https://picsum.photos/600/450?random=5" alt="Contact details category">
-                    <div class="card-overlay"><h3>Contact Us</h3></div>
-                </div>
-            </div>
+  <main>
+    <!-- HOME VIEW -->
+    <section id="home" class="view-section active">
+      <h1 class="view-title">Our Portfolios</h1>
+      <div class="gallery-grid">
+        <div class="card" onclick="showView('weddings')">
+          <img src="https://i.postimg.cc/QxGFV7nw/7d18c3fc-9a2b-4c5b-a833-03ed4389f857.jpg" alt="Weddings">
+          <div class="card-title">Weddings</div>
         </div>
-
-        <!-- ================= PAGE 2: WEDDINGS GALLERY VIEW ================= -->
-        <div id="weddings" class="view">
-            <h2 class="section-title">Wedding Galleries</h2>
-            <div class="grid-container">
-                <a href="https://adobe.ly/4tg2rQv" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=6" alt="Maryam's Wedding">
-                    <div class="card-overlay"><h3>Maryam's Wedding</h3></div>
-                </a>
-                <a href="https://adobe.ly/4myrji7" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=7" alt="Nadia's Wedding">
-                    <div class="card-overlay"><h3>Nadia's Wedding</h3></div>
-                </a>
-                <a href="https://adobe.ly/3VOnTwI" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=8" alt="Sarah's Wedding">
-                    <div class="card-overlay"><h3>Sarah's Wedding</h3></div>
-                </a>
-            </div>
+        <div class="card" onclick="showView('kids')">
+          <img src="https://i.postimg.cc/BQ9jtFwz/8642E7A6-AADD-4D6E-AB64-B6842A5F55B5.jpg" alt="Kids Birthdays / Baptism">
+          <div class="card-title">Kids Birthdays / Baptism</div>
         </div>
-
-        <!-- ================= PAGE 3: KIDS EVENTS GALLERY VIEW ================= -->
-        <div id="kids" class="view">
-            <h2 class="section-title">Kids Birthdays & Baptisms</h2>
-            <div class="grid-container">
-                <a href="https://adobe.ly/41XcvlO" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=9" alt="Baby Baptism">
-                    <div class="card-overlay"><h3>Baby Baptism</h3></div>
-                </a>
-                <a href="https://adobe.ly/3Lzel77" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=10" alt="Baby Birthday">
-                    <div class="card-overlay"><h3>Baby Birthday</h3></div>
-                </a>
-                <a href="https://adobe.ly/4kSfOTz" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=11" alt="Kids Party">
-                    <div class="card-overlay"><h3>Kids Party</h3></div>
-                </a>
-                <a href="https://adobe.ly/4aiH76c" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=12" alt="Kids and Family">
-                    <div class="card-overlay"><h3>Kids and Family</h3></div>
-                </a>
-            </div>
+        <div class="card" onclick="showView('family')">
+          <img src="https://i.postimg.cc/J4VstXd2/92A4BFD8-A4D0-4E2E-84D3-C8FACC2FABA9.jpg" alt="Family Events">
+          <div class="card-title">Family Events</div>
         </div>
-
-        <!-- ================= PAGE 4: FAMILY EVENTS VIEW ================= -->
-        <div id="family" class="view">
-            <h2 class="section-title">Family Event Portfolios</h2>
-            <div class="grid-container">
-                <a href="https://adobe.ly/4sH34SR" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=13" alt="Family Event Client 1">
-                    <div class="card-overlay"><h3>Client 1</h3></div>
-                </a>
-                <a href="https://adobe.ly/3QV5zmz" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=14" alt="Family Event Client 2">
-                    <div class="card-overlay"><h3>Client 2</h3></div>
-                </a>
-                <a href="https://adobe.ly/3LzgD6G" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=15" alt="Family Event Client 3">
-                    <div class="card-overlay"><h3>Client 3</h3></div>
-                </a>
-                <a href="https://adobe.ly/4uP3yHd" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=16" alt="Family Event Client 4">
-                    <div class="card-overlay"><h3>Client 4</h3></div>
-                </a>
-            </div>
+        <div class="card" onclick="showView('babyshower')">
+          <img src="https://i.postimg.cc/wT813Nbb/FC9ABCBD-70F8-4372-81DA-46AB47D6E974.jpg" alt="Babyshower / Gender Reveal">
+          <div class="card-title">Babyshower / Gender Reveal</div>
         </div>
-
-        <!-- ================= PAGE 5: BABYSHOWER & GENDER REVEAL VIEW ================= -->
-        <div id="babyshower" class="view">
-            <h2 class="section-title">Babyshower & Gender Reveals</h2>
-            <div class="grid-container">
-                <a href="https://adobe.ly/49XSPTH" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=17" alt="Babyshower Client 1">
-                    <div class="card-overlay"><h3>Client 1</h3></div>
-                </a>
-                <a href="https://adobe.ly/3Rera9Y" target="_blank" class="card">
-                    <img src="https://picsum.photos/600/450?random=18" alt="Babyshower Client 2">
-                    <div class="card-overlay"><h3>Client 2</h3></div>
-                </a>
-            </div>
+        <div class="card" onclick="showView('contact')">
+          <img src="https://i.postimg.cc/DzgNrh7B/Apix-Logo.png" alt="Contact Us" style="object-fit: contain; padding: 20px;">
+          <div class="card-title">Contact Us</div>
         </div>
+      </div>
+    </section>
 
-        <!-- ================= PAGE 6: CONTACT VIEW ================= -->
-        <div id="contact" class="view">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-box">
-                <div class="contact-item">
-                    <h4>Phone Number</h4>
-                    <a href="tel:+12896283060">+1 (289) 628-3060</a>
-                </div>
-                <div class="contact-item">
-                    <h4>Email Address</h4>
-                    <a href="mailto:teamofapix@gmail.com">teamofapix@gmail.com</a>
-                </div>
-            </div>
+    <!-- WEDDINGS SUB-VIEW -->
+    <section id="weddings" class="view-section">
+      <h1 class="view-title">Wedding Portfolios</h1>
+      <div class="gallery-grid">
+        <a href="https://adobe.ly/4tg2rQv" target="_blank" class="card">
+          <img src="https://i.postimg.cc/BbgtsX35/DSC09677.jpg" alt="Maryam's Wedding">
+          <div class="card-title">Maryam's Wedding</div>
+        </a>
+        <a href="https://adobe.ly/4myrji7" target="_blank" class="card">
+          <img src="https://i.postimg.cc/65J8TZ1k/Weddings.jpg" alt="Nadia's Wedding">
+          <div class="card-title">Nadia's Wedding</div>
+        </a>
+        <a href="https://adobe.ly/3VOnTwI" target="_blank" class="card">
+          <img src="https://i.postimg.cc/MZYDP5Bm/DSC5466.jpg" alt="Sarah's Wedding">
+          <div class="card-title">Sarah's Wedding</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- KIDS SUB-VIEW -->
+    <section id="kids" class="view-section">
+      <h1 class="view-title">Kids Birthdays & Baptism</h1>
+      <div class="gallery-grid">
+        <a href="https://adobe.ly/41XcvlO" target="_blank" class="card">
+          <img src="https://i.postimg.cc/wxJvg423/TAN9961.jpg" alt="Baby Baptism">
+          <div class="card-title">Baby Baptism</div>
+        </a>
+        <a href="https://adobe.ly/3Lzel77" target="_blank" class="card">
+          <img src="https://i.postimg.cc/zDWB827L/photo-output.jpg" alt="Baby Birthday">
+          <div class="card-title">Baby Birthday</div>
+        </a>
+        <a href="https://adobe.ly/4kSfOTz" target="_blank" class="card">
+          <img src="https://i.postimg.cc/1R6ts7B8/9M3A2948.jpg" alt="Kids Party">
+          <div class="card-title">Kids Party</div>
+        </a>
+        <a href="https://adobe.ly/4aiH76c" target="_blank" class="card">
+          <img src="https://i.postimg.cc/59v0bKg6/9M3A8003.jpg" alt="Kids and Family">
+          <div class="card-title">Kids and Family</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- FAMILY SUB-VIEW -->
+    <section id="family" class="view-section">
+      <h1 class="view-title">Family Events</h1>
+      <div class="gallery-grid">
+        <a href="https://adobe.ly/4sH34SR" target="_blank" class="card">
+          <img src="https://i.postimg.cc/4df5shk7/DSC07975.jpg" alt="Client 1">
+          <div class="card-title">Client 1</div>
+        </a>
+        <a href="https://adobe.ly/3QV5zmz" target="_blank" class="card">
+          <img src="https://i.postimg.cc/43b5DQMh/DSC02805.jpg" alt="Client 2">
+          <div class="card-title">Client 2</div>
+        </a>
+        <a href="https://adobe.ly/3LzgD6G" target="_blank" class="card">
+          <img src="https://i.postimg.cc/pTWZRnbW/SIV08361.jpg" alt="Client 3">
+          <div class="card-title">Client 3</div>
+        </a>
+        <a href="https://adobe.ly/4uP3yHd" target="_blank" class="card">
+          <img src="https://i.postimg.cc/PxX4T8sf/IMG-5135.jpg" alt="Client 4">
+          <div class="card-title">Client 4</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- BABYSHOWER SUB-VIEW -->
+    <section id="babyshower" class="view-section">
+      <h1 class="view-title">Babyshower & Gender Reveal</h1>
+      <div class="gallery-grid">
+        <a href="https://adobe.ly/49XSPTH" target="_blank" class="card">
+          <img src="https://i.postimg.cc/N0743kV2/DSC00034.jpg" alt="Client 1">
+          <div class="card-title">Client 1</div>
+        </a>
+        <a href="https://adobe.ly/3Rera9Y" target="_blank" class="card">
+          <img src="https://i.postimg.cc/wT813Nbb/FC9ABCBD-70F8-4372-81DA-46AB47D6E974.jpg" alt="Client 2">
+          <div class="card-title">Client 2</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT VIEW -->
+    <section id="contact" class="view-section">
+      <h1 class="view-title">Contact Us</h1>
+      <div class="contact-container">
+        <div class="contact-item">
+          <strong>Phone:</strong><br>
+          <a href="tel:+12896283060">+1 289-628-3060</a>
         </div>
+        <div class="contact-item">
+          <strong>Email:</strong><br>
+          <a href="mailto:teamofapix@gmail.com">teamofapix@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <strong>Instagram:</strong><br>
+          <a href="https://instagram.com/eventzapix_photography" target="_blank">@eventzapix_photography</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    </main>
-
-    <!-- --- View Swap Engine Script --- -->
-    <script>
-        function showView(viewId) {
-            // Hide all subview panels
-            const views = document.querySelectorAll('.view');
-            views.forEach(view => view.classList.remove('active'));
-
-            // Target selected layout view panel
-            const targetView = document.getElementById(viewId);
-            if(targetView) {
-                targetView.classList.add('active');
-            }
-
-            // Global Home Button controller block
-            const navBanner = document.getElementById('navBanner');
-            if (viewId === 'home') {
-                navBanner.style.display = 'none'; // Hide home button if already home
-            } else {
-                navBanner.style.display = 'flex'; // Show navigation strip on sub-pages
-            }
-
-            // Smooth scroll up when changing screens
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-    </script>
+  <script>
+    function showView(viewId) {
+      const sections = document.querySelectorAll('.view-section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      const activeSection = document.getElementById(viewId);
+      if (activeSection) {
+        activeSection.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
 </body>
 </html>
