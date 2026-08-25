@@ -316,3 +316,45 @@
     </script>
 </body>
 </html>
+<style>
+  /* Animated gradient background */
+  body {
+    background: linear-gradient(-45deg, #f8f9fa, #e9ecef, #f1f3f5, #ffffff);
+    background-size: 400% 400%;
+    animation: softGradient 15s ease infinite;
+    position: relative;
+  }
+
+  @keyframes softGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Decorative soft background glowing circles */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: -1;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  body::before {
+    background: #dbe4ff;
+    top: 10%;
+    left: 5%;
+  }
+
+  body::after {
+    background: #fcc2d7;
+    bottom: 15%;
+    right: 5%;
+  }
+</style>
+
